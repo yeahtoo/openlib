@@ -1,0 +1,14 @@
+*.o
+install
+*/install/
+
+libusb/libusb-1.0.22/
+openssl/openssl-1.1.1d/
+libplist/libplist-2.0.0/
+libusbmuxd/libusbmuxd-1.0.10/
+libimobiledevice/libimobiledevice-1.2.0/
+usbmuxd/usbmuxd-1.1.0/
+libplist/libplist-2.1.0/
+libusbmuxd/libusbmuxd-2.0.2/
+libimobiledevice/libimobiledevice-1.2.1/
+usbmuxd/usbmuxd-1.1.1/

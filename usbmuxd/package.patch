@@ -1,0 +1,28 @@
+diff --git a/src/preflight.c b/src/preflight.c
+index c7cfa50..25ae05e 100644
+--- a/src/preflight.c
++++ b/src/preflight.c
+@@ -44,10 +44,10 @@
+ 
+ #ifdef HAVE_LIBIMOBILEDEVICE
+ #ifndef HAVE_ENUM_IDEVICE_CONNECTION_TYPE
+-enum idevice_connection_type {
+-	CONNECTION_USBMUXD = 1,
+-	CONNECTION_NETWORK
+-};
++// enum idevice_connection_type {
++// 	CONNECTION_USBMUXD = 1,
++// 	CONNECTION_NETWORK
++// };
+ #endif
+ 
+ struct idevice_private {
+@@ -270,7 +270,7 @@ retry:
+ 			"com.apple.mobile.lockdown.request_pair",
+ 			"com.apple.mobile.lockdown.request_host_buid",
+ 			NULL
+-		}; 
++		};
+ 		np_observe_notifications(np, spec);
+ 
+ 		/* TODO send notification to user's desktop */
