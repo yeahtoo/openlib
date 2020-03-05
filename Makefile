@@ -17,7 +17,7 @@ LIBUSBMUXD_VER:=2.0.2
 LIBIMOBILELIST_VER:=1.2.1
 USBMUXD_VER:=1.1.1
 
-packages := libusb openssl libplist libusbmuxd libimobiledevice usbmuxd
+packages := libusb openssl libplist libusbmuxd libimobiledevice usbmuxd zlib openssh
 
 .PHONY : $(packages)
 all: $(packages)
@@ -85,4 +85,24 @@ usbmuxd_clean:
 usbmuxd_distclean:
 	@echo -e "\e[33;1m""---------task [6] distclean usbmuxd---------""\033[00m";
 	make -C $(WORK_DIR)/usbmuxd distclean;
+
+zlib:
+	@echo -e "\e[33;1m""---------task build zlib---------""\033[00m";
+	make -C $(WORK_DIR)/zlib
+zlib_clean:
+	@echo -e "\e[33;1m""---------task clean zlib---------""\033[00m";
+	make -C $(WORK_DIR)/zlib clean;
+zlib_distclean:
+	@echo -e "\e[33;1m""---------task distclean zlib---------""\033[00m";
+	make -C $(WORK_DIR)/zlib distclean;
+
+openssh:
+	@echo -e "\e[33;1m""---------task build openssh---------""\033[00m";
+	make -C $(WORK_DIR)/openssh
+openssh_clean:
+	@echo -e "\e[33;1m""---------task clean openssh---------""\033[00m";
+	make -C $(WORK_DIR)/openssh clean;
+openssh_distclean:
+	@echo -e "\e[33;1m""---------task distclean openssh---------""\033[00m";
+	make -C $(WORK_DIR)/openssh distclean;
 
