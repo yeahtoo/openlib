@@ -4,21 +4,27 @@ PACKAGE_TAR := $(PACKAGE_NAME).tar.bz2
 PREFIX ?= $(PACKAGE_DIR)/install
 CROSS_TOOL ?= aarch64-himix100-linux
 
-all:
-	@-rm -rf $(PACKAGE_DIR)/$(PACKAGE_NAME);
+.PHONY: configure
+configure:
+	@echo -e "\e[32;1m""[1] configure""\033[0m";
 	@-rm -rf $(PACKAGE_DIR)/install;
-	@tar -xjf $(PACKAGE_TAR);
+ifeq ($(wildcard $(PACKAGE_DIR)/$(PACKAGE_NAME)/.*), )
+	tar -xjf $(PACKAGE_TAR);
 	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/; \
-		echo -e "\e[32;1m""[1] configure""\033[0m"; \
 		./configure --host=$(CROSS_TOOL) \
 		--prefix=$(PREFIX) \
 		--disable-udev; \
+	popd
+endif
+
+all: configure
+	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/; \
 		echo -e "\e[32;1m""[2] make""\033[0m"; \
 		make -j 20; \
 		echo -e "\e[32;1m""[3] install""\033[0m"; \
 		make install; \
 		cp -rp $(PACKAGE_DIR)/$(PACKAGE_NAME)/libusb/libusb.h $(PREFIX)/include; \
-		echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m" \
+		echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m"; \
 	popd
 
 .PHONY: clean

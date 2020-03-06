@@ -28,7 +28,7 @@ distclean: $(foreach n, $(packages), $(n)_distclean)
 
 libusb:
 	@echo -e "\e[33;1m""---------task [1] build libusb---------""\033[00m";
-	make -C $(WORK_DIR)/libusb
+	make -C $(WORK_DIR)/libusb all;
 libusb_clean:
 	@echo -e "\e[33;1m""---------task [1] clean libusb---------""\033[00m";
 	make -C $(WORK_DIR)/libusb clean;
@@ -38,7 +38,7 @@ libusb_distclean:
 
 openssl:
 	@echo -e "\e[33;1m""---------task [2] build openssl---------""\033[00m";
-	make -C $(WORK_DIR)/openssl
+	make -C $(WORK_DIR)/openssl all;
 openssl_clean:
 	@echo -e "\e[33;1m""---------task [2] clean openssl---------""\033[00m";
 	make -C $(WORK_DIR)/openssl clean;
@@ -48,7 +48,7 @@ openssl_distclean:
 
 libplist:
 	@echo -e "\e[33;1m""---------task [3] build libplist---------""\033[00m";
-	make -C $(WORK_DIR)/libplist
+	make -C $(WORK_DIR)/libplist all;
 libplist_clean:
 	@echo -e "\e[33;1m""---------task [3] clean libplist---------""\033[00m";
 	make -C $(WORK_DIR)/libplist clean;
@@ -56,9 +56,9 @@ libplist_distclean:
 	@echo -e "\e[33;1m""---------task [3] distclean libplist---------""\033[00m";
 	make -C $(WORK_DIR)/libplist distclean;
 
-libusbmuxd:
+libusbmuxd: libplist
 	@echo -e "\e[33;1m""---------task [4] build libusbmuxd---------""\033[00m";
-	make -C $(WORK_DIR)/libusbmuxd
+	make -C $(WORK_DIR)/libusbmuxd all;
 libusbmuxd_clean:
 	@echo -e "\e[33;1m""---------task [4] clean libusbmuxd---------""\033[00m";
 	make -C $(WORK_DIR)/libusbmuxd clean;
@@ -66,9 +66,9 @@ libusbmuxd_distclean:
 	@echo -e "\e[33;1m""---------task [4] distclean libusbmuxd---------""\033[00m";
 	make -C $(WORK_DIR)/libusbmuxd distclean;
 
-libimobiledevice:
+libimobiledevice: openssl libusbmuxd
 	@echo -e "\e[33;1m""---------task [5] build libimobiledevice---------""\033[00m";
-	make -C $(WORK_DIR)/libimobiledevice
+	make -C $(WORK_DIR)/libimobiledevice all;
 libimobiledevice_clean:
 	@echo -e "\e[33;1m""---------task [5] clean libimobiledevice---------""\033[00m";
 	make -C $(WORK_DIR)/libimobiledevice clean;
@@ -76,9 +76,9 @@ libimobiledevice_distclean:
 	@echo -e "\e[33;1m""---------task [5] distclean libimobiledevice---------""\033[00m";
 	make -C $(WORK_DIR)/libimobiledevice distclean;
 
-usbmuxd:
+usbmuxd: libusb libimobiledevice
 	@echo -e "\e[33;1m""---------task [6] build usbmuxd---------""\033[00m";
-	make -C $(WORK_DIR)/usbmuxd
+	make -C $(WORK_DIR)/usbmuxd all;
 usbmuxd_clean:
 	@echo -e "\e[33;1m""---------task [6] clean usbmuxd---------""\033[00m";
 	make -C $(WORK_DIR)/usbmuxd clean;
@@ -88,7 +88,7 @@ usbmuxd_distclean:
 
 zlib:
 	@echo -e "\e[33;1m""---------task build zlib---------""\033[00m";
-	make -C $(WORK_DIR)/zlib
+	make -C $(WORK_DIR)/zlib all;
 zlib_clean:
 	@echo -e "\e[33;1m""---------task clean zlib---------""\033[00m";
 	make -C $(WORK_DIR)/zlib clean;
@@ -96,9 +96,9 @@ zlib_distclean:
 	@echo -e "\e[33;1m""---------task distclean zlib---------""\033[00m";
 	make -C $(WORK_DIR)/zlib distclean;
 
-openssh:
+openssh: zlib openssl
 	@echo -e "\e[33;1m""---------task build openssh---------""\033[00m";
-	make -C $(WORK_DIR)/openssh
+	make -C $(WORK_DIR)/openssh all;
 openssh_clean:
 	@echo -e "\e[33;1m""---------task clean openssh---------""\033[00m";
 	make -C $(WORK_DIR)/openssh clean;
