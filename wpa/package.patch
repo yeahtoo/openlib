@@ -1,0 +1,37 @@
+--- back/Makefile	2019-08-07 21:25:25.000000000 +0800
++++ wpa_supplicant-2.9/wpa_supplicant/Makefile	2020-03-06 14:53:36.648653840 +0800
+@@ -1,7 +1,11 @@
+-ifndef CC
++ifndef CROSS_TOOL
+ CC=gcc
++else
++CC=$(CROSS_TOOL)-gcc
+ endif
+
++PREFIX ?= /usr/local
++
+ ifndef CFLAGS
+ CFLAGS = -MMD -O2 -Wall -g
+ endif
+@@ -17,14 +21,18 @@
+ endif
+ endif
+
+-export LIBDIR ?= /usr/local/lib/
+-export INCDIR ?= /usr/local/include/
+-export BINDIR ?= /usr/local/sbin/
++export LIBDIR ?= $(PREFIX)/lib
++export INCDIR ?= $(PREFIX)/include
++export BINDIR ?= $(PREFIX)/sbin
+ PKG_CONFIG ?= pkg-config
+
+ CFLAGS += $(EXTRA_CFLAGS)
+ CFLAGS += -I$(abspath ../src)
+ CFLAGS += -I$(abspath ../src/utils)
++CFLAGS += -I$(PREFIX)/include/
++CFLAGS += -I$(PREFIX)/include/libnl3/
++
++LIBS += -L$(PREFIX)/lib/
+
+ -include .config
+

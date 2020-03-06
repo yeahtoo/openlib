@@ -14,3 +14,7 @@ libimobiledevice/libimobiledevice-1.2.1/
 usbmuxd/usbmuxd-1.1.1/
 zlib/zlib-1.2.11/
 openssh/openssh-8.2p1/
+wireless/wireless_tools.29/
+wpa/wpa_supplicant-2.9/
+libnl/libnl-3.2.25/
+hostapd/hostapd-2.9/

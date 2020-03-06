@@ -29,9 +29,7 @@ all: configure
 
 .PHONY: clean
 clean:
-	@-pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/ &&\
-	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/ clean && \
-	popd
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/ clean;
 
 .PHONY: distclean
 distclean:

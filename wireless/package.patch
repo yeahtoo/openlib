@@ -1,0 +1,16 @@
+--- back/Makefile	2007-09-18 07:56:46.000000000 +0800
++++ wireless_tools.29/Makefile	2020-03-06 10:33:45.633170703 +0800
+@@ -9,10 +9,10 @@
+ endif
+ 
+ ## Compiler to use (modify this for cross compile).
+-CC = gcc
++CC = $(CROSS_TOOL)-gcc
+ ## Other tools you need to modify for cross compile (static lib only).
+-AR = ar
+-RANLIB = ranlib
++AR = $(CROSS_TOOL)-ar
++RANLIB = $(CROSS_TOOL)-ranlib
+ 
+ ## Uncomment this to build tools using static version of the library.
+ ## Mostly useful for embedded platforms without ldd, or to create

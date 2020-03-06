@@ -17,7 +17,7 @@ LIBUSBMUXD_VER:=2.0.2
 LIBIMOBILELIST_VER:=1.2.1
 USBMUXD_VER:=1.1.1
 
-packages := libusb openssl libplist libusbmuxd libimobiledevice usbmuxd zlib openssh
+packages := libusb openssl libplist libusbmuxd libimobiledevice usbmuxd zlib openssh wireless libnl hostapd wpa
 
 .PHONY : $(packages)
 all: $(packages)
@@ -105,4 +105,44 @@ openssh_clean:
 openssh_distclean:
 	@echo -e "\e[33;1m""---------task distclean openssh---------""\033[00m";
 	make -C $(WORK_DIR)/openssh distclean;
+
+wireless:
+	@echo -e "\e[33;1m""---------task build wireless---------""\033[00m";
+	make -C $(WORK_DIR)/wireless all;
+wireless_clean:
+	@echo -e "\e[33;1m""---------task clean wireless---------""\033[00m";
+	make -C $(WORK_DIR)/wireless clean;
+wireless_distclean:
+	@echo -e "\e[33;1m""---------task distclean wireless---------""\033[00m";
+	make -C $(WORK_DIR)/wireless distclean;
+
+libnl:
+	@echo -e "\e[33;1m""---------task build libnl---------""\033[00m";
+	make -C $(WORK_DIR)/libnl all;
+libnl_clean:
+	@echo -e "\e[33;1m""---------task clean libnl---------""\033[00m";
+	make -C $(WORK_DIR)/libnl clean;
+libnl_distclean:
+	@echo -e "\e[33;1m""---------task distclean libnl---------""\033[00m";
+	make -C $(WORK_DIR)/libnl distclean;
+
+hostapd: openssl libnl
+	@echo -e "\e[33;1m""---------task build hostapd---------""\033[00m";
+	make -C $(WORK_DIR)/hostapd all;
+hostapd_clean:
+	@echo -e "\e[33;1m""---------task clean hostapd---------""\033[00m";
+	make -C $(WORK_DIR)/hostapd clean;
+hostapd_distclean:
+	@echo -e "\e[33;1m""---------task distclean hostapd---------""\033[00m";
+	make -C $(WORK_DIR)/hostapd distclean;
+
+wpa: openssl libnl
+	@echo -e "\e[33;1m""---------task build wpa_supplicant---------""\033[00m";
+	make -C $(WORK_DIR)/wpa all;
+wpa_clean:
+	@echo -e "\e[33;1m""---------task clean wpa_supplicant---------""\033[00m";
+	make -C $(WORK_DIR)/wpa clean;
+wpa_distclean:
+	@echo -e "\e[33;1m""---------task distclean wpa_supplicant---------""\033[00m";
+	make -C $(WORK_DIR)/wpa distclean;
 

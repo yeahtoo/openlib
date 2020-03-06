@@ -1,0 +1,29 @@
+--- back/Makefile	2019-08-07 21:25:25.000000000 +0800
++++ hostapd-2.9/hostapd/Makefile	2020-03-06 11:49:31.651078258 +0800
+@@ -1,7 +1,11 @@
+-ifndef CC
++ifndef CROSS_TOOL
+ CC=gcc
++else
++CC=$(CROSS_TOOL)-gcc
+ endif
+
++PREFIX ?= /usr/local
++
+ ifndef CFLAGS
+ CFLAGS = -MMD -O2 -Wall -g
+ endif
+@@ -24,8 +28,12 @@
+ CFLAGS += $(EXTRA_CFLAGS)
+ CFLAGS += -I$(abspath ../src)
+ CFLAGS += -I$(abspath ../src/utils)
++CFLAGS += -I$(PREFIX)/include/
++CFLAGS += -I$(PREFIX)/include/libnl3/
++
++LIBS += -L$(PREFIX)/lib/
+
+-export BINDIR ?= /usr/local/bin/
++export BINDIR ?= $(PREFIX)/bin
+
+ -include .config
+

@@ -1,0 +1,11 @@
+--- back/.config	2019-08-07 21:25:25.000000000 +0800
++++ hostapd-2.9/hostapd/.config	2020-03-06 14:42:56.766803143 +0800
+@@ -16,7 +16,7 @@
+ #CONFIG_DRIVER_WIRED=y
+ 
+ # Driver interface for drivers using the nl80211 kernel interface
+-CONFIG_DRIVER_NL80211=y
++#CONFIG_DRIVER_NL80211=y
+ 
+ # QCA vendor extensions to nl80211
+ #CONFIG_DRIVER_NL80211_QCA=y
