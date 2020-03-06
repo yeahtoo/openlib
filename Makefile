@@ -17,7 +17,7 @@ LIBUSBMUXD_VER:=2.0.2
 LIBIMOBILELIST_VER:=1.2.1
 USBMUXD_VER:=1.1.1
 
-packages := libusb openssl libplist libusbmuxd libimobiledevice usbmuxd zlib openssh wireless libnl hostapd wpa
+packages := libusb openssl libplist libusbmuxd libimobiledevice usbmuxd zlib openssh wireless libnl hostapd wpa ntp
 
 .PHONY : $(packages)
 all: $(packages)
@@ -145,4 +145,14 @@ wpa_clean:
 wpa_distclean:
 	@echo -e "\e[33;1m""---------task distclean wpa_supplicant---------""\033[00m";
 	make -C $(WORK_DIR)/wpa distclean;
+
+ntp: openssl
+	@echo -e "\e[33;1m""---------task build ntp---------""\033[00m";
+	make -C $(WORK_DIR)/ntp all;
+ntp_clean:
+	@echo -e "\e[33;1m""---------task clean ntp---------""\033[00m";
+	make -C $(WORK_DIR)/ntp clean;
+ntp_distclean:
+	@echo -e "\e[33;1m""---------task distclean ntp---------""\033[00m";
+	make -C $(WORK_DIR)/ntp distclean;
 
