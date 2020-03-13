@@ -5,6 +5,14 @@ PREFIX ?= $(PACKAGE_DIR)/install
 CROSS_TOOL ?= aarch64-himix100-linux
 
 # git clone git@github.com:libimobiledevice/libimobiledevice.git
+		# --disable-largefile \
+
+all: configure
+	@echo -e "\e[32;1m""[2] make""\033[0m";
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/;
+	@echo -e "\e[32;1m""[3] install""\033[0m";
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/ install;
+	@echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m";
 
 .PHONY: configure
 configure:
@@ -17,7 +25,6 @@ ifeq ($(wildcard $(PACKAGE_DIR)/$(PACKAGE_NAME)/.*), )
 		./autogen.sh --host=$(CROSS_TOOL) \
 		--prefix=$(PREFIX) \
 		--without-cython \
-		--disable-largefile \
 		libplist_LIBS="-L$(PREFIX)/lib" \
 		libplist_CFLAGS="-I$(PREFIX)/include" \
 		libusbmuxd_LIBS="-L$(PREFIX)/lib" \
@@ -27,15 +34,6 @@ ifeq ($(wildcard $(PACKAGE_DIR)/$(PACKAGE_NAME)/.*), )
 		LDFLAGS="$(PREFIX)/lib/libplist.so $(PREFIX)/lib/libusbmuxd.so $(PREFIX)/lib/libssl.so $(PREFIX)/lib/libcrypto.so"; \
 	popd
 endif
-
-all: configure
-	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/; \
-		echo -e "\e[32;1m""[2] make""\033[0m"; \
-		make -j 20; \
-		echo -e "\e[32;1m""[3] install""\033[0m"; \
-		make install; \
-		echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m"; \
-	popd
 
 .PHONY: clean
 clean:

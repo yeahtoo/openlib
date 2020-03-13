@@ -1,31 +1,29 @@
 PACKAGE_DIR := $(shell pwd)
-PACKAGE_NAME := libusb-1.0.22
-PACKAGE_TAR := $(PACKAGE_NAME).tar.bz2
+PACKAGE_NAME := libusb-1.0.23
+PACKAGE_TAR := $(PACKAGE_NAME).tar.gz
 PREFIX ?= $(PACKAGE_DIR)/install
-CROSS_TOOL ?= aarch64-himix100-linux
+CROSS_TOOL ?= arm-himix100-linux
+
+all: configure
+	@echo -e "\e[32;1m""[2] make""\033[0m";
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/;
+	@echo -e "\e[32;1m""[3] install""\033[0m";
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/ install;
+	@cp -rp $(PACKAGE_DIR)/$(PACKAGE_NAME)/libusb/libusb.h $(PREFIX)/include;
+	@echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m";
 
 .PHONY: configure
 configure:
 	@echo -e "\e[32;1m""[1] configure""\033[0m";
 	@-rm -rf $(PACKAGE_DIR)/install;
 ifeq ($(wildcard $(PACKAGE_DIR)/$(PACKAGE_NAME)/.*), )
-	tar -xjf $(PACKAGE_TAR);
+	tar -xzf $(PACKAGE_TAR);
 	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/; \
-		./configure --host=$(CROSS_TOOL) \
+		./autogen.sh --host=$(CROSS_TOOL) \
 		--prefix=$(PREFIX) \
 		--disable-udev; \
 	popd
 endif
-
-all: configure
-	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/; \
-		echo -e "\e[32;1m""[2] make""\033[0m"; \
-		make -j 20; \
-		echo -e "\e[32;1m""[3] install""\033[0m"; \
-		make install; \
-		cp -rp $(PACKAGE_DIR)/$(PACKAGE_NAME)/libusb/libusb.h $(PREFIX)/include; \
-		echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m"; \
-	popd
 
 .PHONY: clean
 clean:

@@ -9,13 +9,11 @@ export CROSS_TOOL
 # http://w1.fi/releases/wpa_supplicant-2.9.tar.gz
 
 all: configure
-	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/wpa_supplicant/; \
-		echo -e "\e[32;1m""[2] make""\033[0m"; \
-		make -j 20; \
-		echo -e "\e[32;1m""[3] install""\033[0m"; \
-		make install; \
-		echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m"; \
-	popd
+	@echo -e "\e[32;1m""[2] make""\033[0m";
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/wpa_supplicant/;
+	@echo -e "\e[32;1m""[3] install""\033[0m";
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/wpa_supplicant/ install;
+	@echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m";
 
 .PHONY: configure
 configure:
@@ -32,7 +30,7 @@ endif
 
 .PHONY: clean
 clean:
-	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/ clean;
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/wpa_supplicant clean;
 
 .PHONY: distclean
 distclean:

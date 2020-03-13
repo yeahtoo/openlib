@@ -8,6 +8,13 @@ CROSS_TOOL ?= aarch64-himix100-linux
 # --with-pid-dir=$(PREFIX) \
 # --disable-etc-default-login \
 
+all: configure
+	@echo -e "\e[32;1m""[2] make""\033[0m";
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/;
+	@echo -e "\e[32;1m""[3] install""\033[0m";
+	make -C $(PACKAGE_DIR)/$(PACKAGE_NAME)/ install-nokeys;
+	@echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m";
+
 .PHONY: configure
 configure:
 	@echo -e "\e[32;1m""[1] configure""\033[0m";
@@ -23,15 +30,6 @@ ifeq ($(wildcard $(PACKAGE_DIR)/$(PACKAGE_NAME)/.*), )
 		--disable-strip; \
 	popd
 endif
-
-all: configure
-	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/; \
-		echo -e "\e[32;1m""[2] make""\033[0m"; \
-		make -j 20; \
-		echo -e "\e[32;1m""[3] install""\033[0m"; \
-		make install-nokeys; \
-		echo -e "\e[32;1m""$(PACKAGE_NAME) down!""\033[0m"; \
-	popd
 
 .PHONY: clean
 clean:
