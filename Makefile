@@ -18,7 +18,7 @@ LIBUSBMUXD_VER:=2.0.2
 LIBIMOBILELIST_VER:=1.2.1
 USBMUXD_VER:=1.1.1
 
-packages := libusb openssl libplist libusbmuxd libimobiledevice usbmuxd zlib openssh wireless libnl hostapd wpa ntp
+packages := libusb openssl libplist libusbmuxd libimobiledevice usbmuxd zlib openssh wireless libnl hostapd wpa ntp usb-modeswitch
 
 .PHONY : $(packages)
 all: $(packages)
@@ -156,4 +156,14 @@ ntp_clean:
 ntp_distclean:
 	@echo -e "\e[33;1m""---------task distclean ntp---------""\033[00m";
 	make -C $(WORK_DIR)/ntp distclean;
+
+usb-modeswitch:
+	@echo -e "\e[33;1m""---------task build usb-modeswitch---------""\033[00m";
+	make -C $(WORK_DIR)/usb-modeswitch all;
+usb-modeswitch_clean:
+	@echo -e "\e[33;1m""---------task clean usb-modeswitch---------""\033[00m";
+	make -C $(WORK_DIR)/usb-modeswitch clean;
+usb-modeswitch_distclean:
+	@echo -e "\e[33;1m""---------task distclean usb-modeswitch---------""\033[00m";
+	make -C $(WORK_DIR)/usb-modeswitch distclean;
 

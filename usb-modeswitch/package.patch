@@ -1,0 +1,12 @@
+--- usb-modeswitch-2.6.0/Makefile	2019-11-12 04:45:13.000000000 +0800
++++ back/Makefile	2020-03-16 12:06:07.275097303 +0800
+@@ -2,7 +2,8 @@
+ VERS        = 2.6.0
+ CC          ?= gcc
+ CFLAGS      += -Wall -Wno-deprecated-declarations
+-LIBS        = `pkg-config --libs --cflags libusb-1.0`
++LIBS        := `pkg-config --libs --cflags libusb-1.0`
++LIBS        += -L$(DESTDIR)/lib
+ RM          = /bin/rm -f
+ OBJS        = usb_modeswitch.c
+ PREFIX      = $(DESTDIR)/usr
