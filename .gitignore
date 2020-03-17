@@ -3,14 +3,15 @@ install
 */install/
 
 libusb/libusb-1.0.22/
+libusb/libusb-1.0.23/
 openssl/openssl-1.1.1d/
 libplist/libplist-2.0.0/
-libusbmuxd/libusbmuxd-1.0.10/
-libimobiledevice/libimobiledevice-1.2.0/
-usbmuxd/usbmuxd-1.1.0/
 libplist/libplist-2.1.0/
+libusbmuxd/libusbmuxd-1.0.10/
 libusbmuxd/libusbmuxd-2.0.2/
+libimobiledevice/libimobiledevice-1.2.0/
 libimobiledevice/libimobiledevice-1.2.1/
+usbmuxd/usbmuxd-1.1.0/
 usbmuxd/usbmuxd-1.1.1/
 zlib/zlib-1.2.11/
 openssh/openssh-8.2p1/
@@ -19,9 +20,5 @@ wpa/wpa_supplicant-2.9/
 libnl/libnl-3.2.25/
 hostapd/hostapd-2.9/
 ntp/ntp-4.2.8p14/
-<<<<<<< Updated upstream
-libusb/libusb-1.0.23/
-=======
 usb-modeswitch/usb-modeswitch-2.6.0
->>>>>>> Stashed changes
 test/costtime

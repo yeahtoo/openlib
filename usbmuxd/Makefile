@@ -5,6 +5,7 @@ PREFIX ?= $(PACKAGE_DIR)/install
 CROSS_TOOL ?= aarch64-himix100-linux
 
 # git clone git@github.com:libimobiledevice/usbmuxd.git
+		# --with-systemdsystemunitdir="$(PREFIX)"
 
 all: configure
 	@echo -e "\e[32;1m""[2] make""\033[0m";
@@ -23,7 +24,7 @@ ifeq ($(wildcard $(PACKAGE_DIR)/$(PACKAGE_NAME)/.*), )
 		./autogen.sh --host=$(CROSS_TOOL) \
 		--prefix=$(PREFIX) \
 		--with-udevrulesdir="$(PREFIX)" \
-		--with-systemdsystemunitdir="$(PREFIX)" \
+		--without-systemd \
 		libusb_LIBS="-L$(PREFIX)/lib" \
 		libusb_CFLAGS="-I$(PREFIX)/include" \
 		libplist_LIBS="-L$(PREFIX)/lib" \

@@ -6,6 +6,7 @@ CROSS_TOOL ?= aarch64-himix100-linux
 
 # git clone git@github.com:libimobiledevice/libimobiledevice.git
 		# --disable-largefile \
+		# patch -p1 < $(PACKAGE_DIR)/package.patch; \
 
 all: configure
 	@echo -e "\e[32;1m""[2] make""\033[0m";
@@ -21,16 +22,17 @@ configure:
 ifeq ($(wildcard $(PACKAGE_DIR)/$(PACKAGE_NAME)/.*), )
 	tar -xzf $(PACKAGE_TAR)
 	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/; \
-		patch -p1 < $(PACKAGE_DIR)/package.patch; \
 		./autogen.sh --host=$(CROSS_TOOL) \
 		--prefix=$(PREFIX) \
 		--without-cython \
+		--enable-debug-code \
 		libplist_LIBS="-L$(PREFIX)/lib" \
 		libplist_CFLAGS="-I$(PREFIX)/include" \
 		libusbmuxd_LIBS="-L$(PREFIX)/lib" \
 		libusbmuxd_CFLAGS="-I$(PREFIX)/include" \
 		openssl_LIBS="-L$(PREFIX)/lib" \
 		openssl_CFLAGS="-I$(PREFIX)/include" \
+		CFLAGS="-I$(PREFIX)/include" \
 		LDFLAGS="$(PREFIX)/lib/libplist.so $(PREFIX)/lib/libusbmuxd.so $(PREFIX)/lib/libssl.so $(PREFIX)/lib/libcrypto.so"; \
 	popd
 endif
