@@ -1,8 +1,11 @@
 PACKAGE_DIR := $(shell pwd)
-PACKAGE_NAME := openssl-1.1.1d
+PACKAGE_NAME := openssl-1.1.1e
 PACKAGE_TAR := $(PACKAGE_NAME).tar.gz
 PREFIX ?= $(PACKAGE_DIR)/install
-CROSS_TOOL ?= aarch64-himix100-linux
+CROSS_TOOL ?= arm-himix100-linux
+
+export PREFIX
+export CROSS_COMPILE=$(CROSS_TOOL)-
 
 all: configure
 	@echo -e "\e[32;1m""[2] make""\033[0m";
@@ -17,14 +20,7 @@ configure:
 	@-rm -rf $(PACKAGE_DIR)/install;
 ifeq ($(wildcard $(PACKAGE_DIR)/$(PACKAGE_NAME)/.*), )
 	tar -xzf $(PACKAGE_TAR)
-	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/; \
-		./config \
-		--prefix=$(PREFIX) \
-		CROSS_COMPILE=$(CROSS_TOOL)- \
-		no-asm shared no-async; \
-		echo -e "\e[32;1m""--- patch ---""\033[0m"; \
-		patch -p1 < $(PACKAGE_DIR)/package.patch; \
-	popd
+	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/;setarch i386 ./config no-asm shared no-async --prefix=$(PREFIX);popd
 endif
 
 .PHONY: clean

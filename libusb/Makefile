@@ -1,6 +1,6 @@
 PACKAGE_DIR := $(shell pwd)
-PACKAGE_NAME := libusb-1.0.23
-PACKAGE_TAR := $(PACKAGE_NAME).tar.gz
+PACKAGE_NAME := libusb-1.0.22
+PACKAGE_TAR := $(PACKAGE_NAME).tar.bz2
 PREFIX ?= $(PACKAGE_DIR)/install
 CROSS_TOOL ?= arm-himix100-linux
 
@@ -17,9 +17,9 @@ configure:
 	@echo -e "\e[32;1m""[1] configure""\033[0m";
 	@-rm -rf $(PACKAGE_DIR)/install;
 ifeq ($(wildcard $(PACKAGE_DIR)/$(PACKAGE_NAME)/.*), )
-	tar -xzf $(PACKAGE_TAR);
+	tar -xjf $(PACKAGE_TAR);
 	@pushd $(PACKAGE_DIR)/$(PACKAGE_NAME)/; \
-		./autogen.sh --host=$(CROSS_TOOL) \
+		./configure --host=$(CROSS_TOOL) \
 		--prefix=$(PREFIX) \
 		--disable-udev; \
 	popd

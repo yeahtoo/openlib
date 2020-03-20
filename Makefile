@@ -57,7 +57,7 @@ libplist_distclean:
 	@echo -e "\e[33;1m""---------task [3] distclean libplist---------""\033[00m";
 	make -C $(WORK_DIR)/libplist distclean;
 
-libusbmuxd:
+libusbmuxd: libplist
 	@echo -e "\e[33;1m""---------task [4] build libusbmuxd---------""\033[00m";
 	make -C $(WORK_DIR)/libusbmuxd all;
 libusbmuxd_clean:
@@ -67,7 +67,7 @@ libusbmuxd_distclean:
 	@echo -e "\e[33;1m""---------task [4] distclean libusbmuxd---------""\033[00m";
 	make -C $(WORK_DIR)/libusbmuxd distclean;
 
-libimobiledevice:
+libimobiledevice: openssl libusbmuxd
 	@echo -e "\e[33;1m""---------task [5] build libimobiledevice---------""\033[00m";
 	make -C $(WORK_DIR)/libimobiledevice all;
 libimobiledevice_clean:
@@ -77,7 +77,7 @@ libimobiledevice_distclean:
 	@echo -e "\e[33;1m""---------task [5] distclean libimobiledevice---------""\033[00m";
 	make -C $(WORK_DIR)/libimobiledevice distclean;
 
-usbmuxd:
+usbmuxd: libusb libimobiledevice
 	@echo -e "\e[33;1m""---------task [6] build usbmuxd---------""\033[00m";
 	make -C $(WORK_DIR)/usbmuxd all;
 usbmuxd_clean:

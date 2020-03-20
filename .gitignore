@@ -22,3 +22,4 @@ hostapd/hostapd-2.9/
 ntp/ntp-4.2.8p14/
 usb-modeswitch/usb-modeswitch-2.6.0
 test/costtime
+openssl/openssl-1.1.1e/
